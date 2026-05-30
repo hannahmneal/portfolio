@@ -242,6 +242,7 @@ out
 # Nuxt.js build / generate output
 .nuxt
 dist
+dist/
 
 # Gatsby files
 .cache/
@@ -322,3 +323,9 @@ sketch
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,react,macos,jetbrains
+
+# Infrastructure
+terraform.tfvars
+*.tfstate
+*.tfstate.backup
+.terraform/
