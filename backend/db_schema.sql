@@ -1,10 +1,3 @@
--- =============================================================================
--- psql -U postgres -d portfolio -f schema.sql
---
--- To create the database first:
---   psql -U postgres -c "CREATE DATABASE portfolio;"
--- =============================================================================
-
 CREATE TABLE IF NOT EXISTS users (
   id              VARCHAR PRIMARY KEY,
   name            TEXT        NOT NULL,
