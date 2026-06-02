@@ -91,4 +91,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          command: pages deploy frontend/dist --project-name=portfolio --branch=main
+          workingDirectory: frontend
+          command: pages deploy
