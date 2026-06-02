@@ -67,10 +67,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Set up Node 25
-        uses: actions/setup-node@v3
+      - name: Set up Node 24
+        uses: actions/setup-node@v4
         with:
-          node-version: "25"
+          node-version: "24"
           cache: "npm"
           cache-dependency-path: frontend/package-lock.json
 
@@ -84,10 +84,10 @@ jobs:
         env:
           # Expose the API base URL to Vite at build time.
           # In your React code, use: import.meta.env.VITE_API_URL
-          VITE_API_URL: https://api.${{ secrets.DOMAIN }}
+          VITE_API_URL: https://api.${{ vars.DOMAIN }}
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
