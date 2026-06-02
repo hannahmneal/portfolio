@@ -1,3 +1,4 @@
 name                  = "portfolio"
 pages_build_output_dir = "./dist"
 compatibility_date    = "2026-06-01"
+account_id = "b89c67dd628b04e9e40f2e30f7d1a419"
