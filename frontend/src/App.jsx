@@ -1,8 +1,18 @@
-import { useState } from 'react'
+// import { useEffect, useState } from 'react'
 import './App.css'
 
-function App() {
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3001"
+
+export default function App() {
   const [count, setCount] = useState(0)
+  // const [status, setStatus] = useState(null)
+
+  // useEffect(() => {
+  //   fetch(`${API_URL}/health`)
+  //     .then(r => r.json())
+  //     .then(d => setStatus(d.status))
+  //     .catch(() => setStatus("unreachable"))
+  // }, [])
 
   return (
     <>
@@ -24,5 +34,3 @@ function App() {
     </>
   )
 }
-
-export default App
