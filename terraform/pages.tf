@@ -16,7 +16,7 @@ resource "cloudflare_pages_project" "portfolio" {
       repo_name           = var.github_repo
       production_branch   = "main"
       pr_comments_enabled = true
-      deployments_enabled = true
+      production_deployments_enabled = true
     }
   }
 }
