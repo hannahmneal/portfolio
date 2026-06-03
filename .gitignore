@@ -329,3 +329,9 @@ terraform.tfvars
 *.tfstate
 *.tfstate.backup
 .terraform/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
