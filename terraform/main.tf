@@ -1,6 +1,6 @@
 output "tunnel_token" {
   description = "Paste into cloudflared on your home server: terraform output -raw tunnel_token"
-  value       = cloudflare_zero_trust_tunnel_cloudflared.home.tunnel_token
+  value       = data.cloudflare_zero_trust_tunnel_cloudflared_token.home.token
   sensitive   = true
 }
 

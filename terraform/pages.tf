@@ -1,5 +1,3 @@
-# Creates the Cloudflare Pages project and connects it to your GitHub repo.
-# On every push to main, Cloudflare rebuilds and redeploys automatically.
 resource "cloudflare_pages_project" "portfolio" {
   account_id        = var.cloudflare_account_id
   name              = "portfolio"
@@ -30,6 +28,7 @@ resource "cloudflare_dns_record" "apex" {
   content = "${cloudflare_pages_project.portfolio.name}.pages.dev"
   type    = "CNAME"
   proxied = true
+  ttl     = 1
 }
 
 # www.yourname.com → Pages
@@ -39,4 +38,5 @@ resource "cloudflare_dns_record" "www" {
   content = "${cloudflare_pages_project.portfolio.name}.pages.dev"
   type    = "CNAME"
   proxied = true
+  ttl     = 1
 }
