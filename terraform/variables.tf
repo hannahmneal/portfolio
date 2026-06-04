@@ -20,7 +20,7 @@ variable "domain" {
 }
 
 variable "github_owner" {
-  description = "hannahmneal"
+  description = "The entity on GitHub that owns the repo"
   type        = string
 }
 

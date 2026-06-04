@@ -1,6 +1,13 @@
 terraform {
   required_version = ">= 1.6"
 
+  cloud {
+    organization = "RedQueenVentures"
+    workspaces {
+      name = "portfolio"
+    }
+  }
+
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"

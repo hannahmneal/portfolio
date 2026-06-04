@@ -23,7 +23,7 @@ app.use(express.json())
 // Update this once your custom domain is live.
 app.use(cors({
     origin: [
-        "https://portfolio.pages.dev",
+        "https://portfolio-3dk.pages.dev",
         // Add your custom domain here once it's live:
         "https://redqueen.run",
         // Allow localhost during frontend development:
