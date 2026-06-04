@@ -40,3 +40,15 @@ resource "cloudflare_dns_record" "www" {
   proxied = true
   ttl     = 1
 }
+
+resource "cloudflare_pages_domain" "apex" {
+  account_id   = var.cloudflare_account_id
+  project_name = cloudflare_pages_project.portfolio.name
+  name         = var.domain
+}
+
+resource "cloudflare_pages_domain" "www" {
+  account_id   = var.cloudflare_account_id
+  project_name = cloudflare_pages_project.portfolio.name
+  name         = "www.${var.domain}"
+}
