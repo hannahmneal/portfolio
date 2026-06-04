@@ -25,7 +25,7 @@ resource "cloudflare_pages_project" "portfolio" {
 resource "cloudflare_dns_record" "apex" {
   zone_id = var.cloudflare_zone_id
   name    = var.domain
-  content = "${cloudflare_pages_project.portfolio.name}.pages.dev"
+  content = cloudflare_pages_project.portfolio.subdomain  # ❗️ This points to the my assigned subdomain "porfolio-3dk.pages.dev" ("portfolio.pages.dev" is owned by someone else.)
   type    = "CNAME"
   proxied = true
   ttl     = 1
@@ -35,7 +35,7 @@ resource "cloudflare_dns_record" "apex" {
 resource "cloudflare_dns_record" "www" {
   zone_id = var.cloudflare_zone_id
   name    = "www"
-  content = "${cloudflare_pages_project.portfolio.name}.pages.dev"
+  content = cloudflare_pages_project.portfolio.subdomain  # ❗️ This points to the my assigned subdomain "porfolio-3dk.pages.dev" ("portfolio.pages.dev" is owned by someone else.)
   type    = "CNAME"
   proxied = true
   ttl     = 1
