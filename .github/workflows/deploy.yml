@@ -72,7 +72,7 @@ jobs:
 
   backend:
     name: Deploy backend
-    runs-on: self-hosted   # runs ON your desktop
+    runs-on: self-hosted
     needs: infra
     steps:
       - uses: actions/checkout@v4
@@ -104,3 +104,15 @@ jobs:
           npm ci
           npm test
         working-directory: backend
+
+  audit:
+    name: Snyk vulnerability scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --all-projects --severity-threshold=medium
