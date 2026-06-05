@@ -92,6 +92,9 @@ app.post("/api/contact", async (req, res) => {
     }
 })
 
-app.listen(PORT, () => {
-    console.log(`API running on http://localhost:${PORT}`)
-})
+// Export app for testing; only listen when run directly
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`))
+}
+
+export default app
