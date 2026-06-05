@@ -106,13 +106,16 @@ jobs:
         working-directory: backend
 
   audit:
-    name: Snyk vulnerability scan
+    name: Dependency audit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - uses: actions/setup-node@v4
         with:
-          args: --all-projects --severity-threshold=medium
+          node-version: 20
+      - name: Audit frontend
+        run: npm audit --audit-level=high
+        working-directory: frontend
+      - name: Audit backend
+        run: npm audit --audit-level=high
+        working-directory: backend
