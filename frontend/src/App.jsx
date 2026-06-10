@@ -1,9 +1,19 @@
 // import { useEffect, useState } from 'react'
+import { CacheProvider } from '@emotion/react';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from './theme.js';
+import createEmotionCache from './createEmotionCache.js'
 import './App.css'
+import { Avatar, Box, Button, Container, Divider, Grid, Paper, Skeleton, TextField, Typography } from '@mui/material';
+import Frame from './components/frame.jsx';
 
+// TODO: if dev, API_URL = local; else, API_URL = prod
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3001"
 
 export default function App() {
+  const cache = createEmotionCache();
+
   // TODO: Un-comment when backend/API is ready:
   
   // const [status, setStatus] = useState(null)
@@ -16,16 +26,32 @@ export default function App() {
   // }, [])
 
   return (
-    <>
-      <section id="center">
-        <div className="hero" />
-        <div>
-          <h1>Coming soon!</h1>
-          <p>
-            This is the home for my professional portfolio.
-          </p>
-        </div>
-      </section>
-    </>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Frame>
+          <Typography typography={theme.typography.subtitle2}>
+            — Portfolio —
+          </Typography>
+          <Typography
+            typography={theme.typography.h1}
+          >
+            Coming soon!
+          </Typography>
+          <Box
+            sx={{
+              width: "48px",
+              height: "1px",
+              backgroundColor: `${theme.palette.primary.main}`,
+              mt: 0.5,
+            }}
+          />
+          <Typography typography={theme.typography.subtitle1}
+          >
+            This is the home of my professional portfolio.
+          </Typography>
+        </Frame>
+      </ThemeProvider>
+    </CacheProvider>
   )
 }
