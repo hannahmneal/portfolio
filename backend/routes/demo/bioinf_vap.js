@@ -20,10 +20,10 @@ router.post("/results", requireApiToken, async (requireApiToken, res) => {
 
     try {
         const { rows } = await pool.query(
-            `INSERT INTO demo_bioinf_results (id, run_id, sample_id, variants, metadata)
+            `INSERT INTO demo_bioinf_results (id, run_id, patient_id, variants, metadata)
              VALUES ($1, $2, $3, $4, $5)
              RETURNING *`,
-            [id, run_id, sample_id ?? null, JSON.stringify(variants), metadata ? JSON.stringify(metadata) : null]
+            [id, run_id, patient_id ?? null, JSON.stringify(variants), metadata ? JSON.stringify(metadata) : null]
         )
         res.status(201).json(rows[0])
     } catch (err) {
