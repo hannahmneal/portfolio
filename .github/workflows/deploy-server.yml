@@ -1,0 +1,67 @@
+name: Deploy server  
+  
+on:
+    push:
+        branches: [main]
+        paths:
+            - 'backend/**'
+            - 'terraform/**'
+            - '.github/workflows/deploy-backend.yml'
+    
+    workflow_dispatch:
+
+jobs:
+    infra:
+        name: Terraform apply
+        runs-on: ubuntu-latest
+        env:
+            TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
+        defaults:
+            run:
+                working-directory: terraform
+        steps:
+            - uses: actions/checkout@v4
+            - uses: hashicorp/setup-terraform@v3
+              with:
+                terraform_version: "~1.15"
+            - run: terraform init
+            - run: terraform validate
+            - run: terraform plan -out=tfplan
+            - run: terraform apply -auto-approve tfplan
+    deploy:
+        name: Deploy backend
+        runs-on: self-hosted
+        needs: infra
+        steps:
+        - uses: actions/checkout@v4
+        - name: Install dependencies
+          run: npm ci
+          working-directory: backend
+        - name: Restart server
+          run: pm2 restart server --update-env
+          working-directory: backend  
+  
+    test:
+        name: Run tests
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 20
+        - run: npm ci
+          working-directory: backend
+        - run: npm test
+          working-directory: backend
+
+    audit:
+        name: Client dependency audit
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v4
+          - uses: actions/setup-node@v4
+            with:
+              node-version: 20
+            # Audit server
+          - run: npm audit --audit-level=high
+            working-directory: backend
