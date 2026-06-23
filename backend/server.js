@@ -12,6 +12,7 @@ import express from "express"
 import cors from "cors"
 import { pool } from "./db.js"
 import { ulid } from "ulid"
+import bioinf from "./routes/demo/bioinf.js"
 
 const app = express()
 const PORT = process.env.PORT ?? 3001
@@ -91,6 +92,8 @@ app.post("/api/contact", async (req, res) => {
         res.status(500).json({ error: "Failed to save message" })
     }
 })
+
+app.use("/api/demo/bioinf", bioinf)
 
 // Export app for testing; only listen when run directly
 if (process.env.NODE_ENV !== 'test') {
