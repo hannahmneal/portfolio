@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS users, projects, contact_messages, demo_bioinf_results;
+
 CREATE TABLE IF NOT EXISTS users (
   id              VARCHAR PRIMARY KEY,
   name            TEXT        NOT NULL,
@@ -16,16 +18,7 @@ CREATE TABLE IF NOT EXISTS projects (
   content     JSONB
 );
 
-CREATE TABLE IF NOT EXISTS contact_messages (
-  id         VARCHAR PRIMARY KEY,
-  name       TEXT        NOT NULL,
-  email      TEXT        NOT NULL,
-  message    TEXT        NOT NULL,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
-);
-
-
-INSERT INTO users (id, name, email, profile_img_url) VALUES ('01KT2Y0J95EATCKP7CMNEM4JZ7'::uuid, 'Test', 'test@email.test')
+INSERT INTO users (id, name, email) VALUES ('01KT2Y0J95EATCKP7CMNEM4JZ7', 'Test', 'test@email.test');
 
 -- Seed a sample project so the frontend has something to display immediately
 INSERT INTO projects (
@@ -33,11 +26,9 @@ INSERT INTO projects (
     title,
     description,
     url,
-    tags,
-    created_at,
-    content
+    tags
   ) VALUES
-  ('01KT2XWJ9G63F5JVNXQFEECYJJ'::uuid, 'Portfolio', 'Ask me about my projects!' , 'https://github.com/hannahmneal/portfolio', ARRAY['React', 'Node', 'Cloudflare', 'Terraform'])
+  ('01KT2XWJ9G63F5JVNXQFEECYJJ', 'Portfolio', 'Ask me about my projects!', 'https://github.com/hannahmneal/portfolio', ARRAY['React', 'Node', 'Cloudflare', 'Terraform', 'Demo'])
 ON CONFLICT DO NOTHING;
 -- 'This site — React frontend, Node/Express API, self-hosted Postgres, deployed via Cloudflare Pages + Tunnel.'
 
@@ -48,4 +39,4 @@ CREATE TABLE IF NOT EXISTS demo_bioinf_results (
   variants        JSONB           NOT NULL DEFAULT '[]',
   metadata        JSONB,
   submitted_at    TIMESTAMPTZ     NOT NULL DEFAULT now()
-)
+);
