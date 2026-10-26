@@ -1,0 +1,16 @@
+# Copy to terraform.tfvars for local runs (gitignored) or supply the same
+# names as -var flags / TF_VAR_ environment variables in CI.
+
+cloudflare_api_token = "xxx" # Pages:Edit, DNS:Edit
+cloudflare_account_id = "xxx"
+cloudflare_zone_id    = "xxx" # Cloudflare dashboard > redqueen.run > Overview, right sidebar
+domain                = "redqueen.run"
+github_owner          = "hannahmneal"
+github_repo           = "portfolio"
+
+render_api_key   = "rnd_xxx"
+render_owner_id  = "usr-xxx" # or tea-xxx for a team workspace
+neon_api_key     = "napi_xxx"
+neon_org_id      = "org-xxx" # Neon console > Organization settings
+image_repository = "ghcr.io/hannahmneal/portfolio-api"
+api_subdomain    = "api"
