@@ -24,9 +24,10 @@ CREATE TABLE IF NOT EXISTS contact_messages (
 );
 
 
-INSERT INTO users (id, name, email, profile_img_url) VALUES ('01KT2Y0J95EATCKP7CMNEM4JZ7'::uuid, 'Test', 'test@email.test')
+INSERT INTO users (id, name, email, profile_img_url) VALUES ('01KT2Y0J95EATCKP7CMNEM4JZ7', 'Test', 'test@email.test', NULL)
+ON CONFLICT DO NOTHING;
 
 -- Seed a sample project so the frontend has something to display immediately
 INSERT INTO projects (id, title, description, url, tags) VALUES
-  ('01KT2XWJ9G63F5JVNXQFEECYJJ'::uuid, 'Portfolio', 'This site — React frontend, Node/Express API, self-hosted Postgres, deployed via Cloudflare Pages + Tunnel.', 'https://github.com/hannahmneal/portfolio', ARRAY['React', 'Node', 'Cloudflare', 'Terraform'])
+  ('01KT2XWJ9G63F5JVNXQFEECYJJ', 'Portfolio', 'This site — React frontend, Node/Express API, deployed via Cloudflare Pages + Render + Neon.', 'https://github.com/hannahmneal/portfolio', ARRAY['React', 'Node', 'Cloudflare', 'Terraform'])
 ON CONFLICT DO NOTHING;
