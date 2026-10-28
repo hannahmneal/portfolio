@@ -19,6 +19,27 @@ resource "cloudflare_pages_project" "portfolio" {
       production_deployments_enabled = true
     }
   }
+
+  # The cloudflare provider's Read for this resource never settles these
+  # fields back to a stable value - every plan shows them flipping to
+  # "(known after apply)" even right after a clean apply, which isn't real
+  # drift (the Pages project itself isn't changing). Ignore them so `plan`
+  # stays quiet; the attributes we actually manage above are unaffected.
+  lifecycle {
+    ignore_changes = [
+      build_config.build_caching,
+      build_config.web_analytics_tag,
+      build_config.web_analytics_token,
+      source.config.deployments_enabled,
+      source.config.owner_id,
+      source.config.path_excludes,
+      source.config.path_includes,
+      source.config.preview_branch_excludes,
+      source.config.preview_branch_includes,
+      source.config.preview_deployment_setting,
+      source.config.repo_id,
+    ]
+  }
 }
 
 # yourname.com → Pages
