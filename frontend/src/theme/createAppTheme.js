@@ -1,0 +1,88 @@
+import { createTheme } from '@mui/material/styles'
+import { lightStyles, darkStyles, desktopBackgroundPatterns, defaultPattern, defaultAccent } from './styles'
+import { typography } from './typography'
+
+const buildCustom = (mode, styles) => ({
+  patterns: desktopBackgroundPatterns,
+  pattern: defaultPattern[mode],
+  window: {
+    bg: styles.windowBg,
+    border: styles.windowBorder,
+    borderRing: styles.windowBorderRing,
+    shadow: styles.windowShadow,
+    borderRadius: 6,
+  },
+  titleBar: {
+    bg: styles.titleBarBg,
+    text: styles.titleText ?? styles.text,
+    pinstripes: styles.titlePinstripes,
+    height: 26,
+    boxSize: 13,
+  },
+  menuBar: {
+    bg: styles.menuBarBg,
+    border: styles.menuBarBorder,
+    shadow: styles.menuBarShadow,
+    minHeight: 56,
+  },
+  banner: {
+    bg: styles.bannerBg,
+    text: styles.bannerText,
+  },
+  button: {
+    bg: styles.buttonBg,
+    border: styles.buttonBorder,
+    shadow: styles.buttonShadow,
+    pressedBg: styles.buttonPressedBg,
+    pressedText: styles.buttonPressedText,
+    pressedShadow: styles.buttonPressedShadow,
+    minHeight: 44,
+  },
+  sunken: {
+    bg: styles.sunkenBg,
+    border: styles.sunkenBorder,
+    shadow: styles.sunkenShadow,
+  },
+  link: {
+    color: styles.link,
+    visited: styles.linkVisited,
+    hoverText: styles.linkHoverText,
+  },
+  footer: {
+    bg: styles.footerBg,
+    border: styles.footerBorder,
+  },
+  hoverInvert: {
+    bg: styles.hoverInvertBg,
+    text: styles.hoverInvertText,
+  },
+})
+
+export function createAppTheme(mode = 'light', accent = defaultAccent) {
+  const styles = mode === 'dark' ? darkStyles : lightStyles
+
+  return createTheme({
+    cssVariables: false,
+    palette: {
+      mode,
+      text: {
+        primary: styles.text,
+        secondary: styles.textMuted,
+      },
+      divider: styles.windowBorder,
+      background: {
+        default: desktopBackgroundPatterns.solid[mode],
+        paper: styles.windowBg,
+      },
+      primary: {
+        main: accent,
+        contrastText: '#FFFFFF',
+      },
+    },
+    typography,
+    shape: {
+      borderRadius: 6,
+    },
+    custom: buildCustom(mode, styles),
+  })
+}
