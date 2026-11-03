@@ -23,6 +23,7 @@ const buildCustom = (mode, styles) => ({
     bg: styles.menuBarBg,
     border: styles.menuBarBorder,
     shadow: styles.menuBarShadow,
+    divider: styles.menuDivider,
     minHeight: 56,
   },
   banner: {
