@@ -19,10 +19,12 @@ const buildCustom = (mode, styles) => ({
     height: 26,
     boxSize: 13,
   },
-  menuBar: {
-    bg: styles.menuBarBg,
-    border: styles.menuBarBorder,
-    shadow: styles.menuBarShadow,
+  navBar: {
+    bg: styles.navBarBg,
+    border: styles.navBarBorder,
+    shadow: styles.navBarShadow,
+    divider: styles.navDivider,
+    boxIconShadow: styles.navBarBoxIconShadow,
     minHeight: 56,
   },
   banner: {
@@ -36,6 +38,7 @@ const buildCustom = (mode, styles) => ({
     pressedBg: styles.buttonPressedBg,
     pressedText: styles.buttonPressedText,
     pressedShadow: styles.buttonPressedShadow,
+    text: styles.text,
     minHeight: 44,
   },
   sunken: {

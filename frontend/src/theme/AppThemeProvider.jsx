@@ -9,14 +9,22 @@ const ACCENT_STORAGE_KEY = 'hneal-accent'
 
 function readStoredColorMode() {
   if (typeof window === 'undefined') return 'light'
-  const stored = window.localStorage.getItem(THEME_STORAGE_KEY)
-  if (stored === 'light' || stored === 'dark') return stored
+  try {
+    const stored = window.localStorage.getItem(THEME_STORAGE_KEY)
+    if (stored === 'light' || stored === 'dark') return stored
+  } catch {
+    // localStorage can throw (e.g. Safari private browsing); fall back below.
+  }
   return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
 function readStoredAccentColor() {
   if (typeof window === 'undefined') return defaultAccent
-  return window.localStorage.getItem(ACCENT_STORAGE_KEY) ?? defaultAccent
+  try {
+    return window.localStorage.getItem(ACCENT_STORAGE_KEY) ?? defaultAccent
+  } catch {
+    return defaultAccent
+  }
 }
 
 export function AppThemeProvider({ children }) {
@@ -25,7 +33,11 @@ export function AppThemeProvider({ children }) {
 
   const setColorMode = useCallback((next) => {
     setColorModeState(next)
-    window.localStorage?.setItem(THEME_STORAGE_KEY, next)
+    try {
+      window.localStorage?.setItem(THEME_STORAGE_KEY, next)
+    } catch {
+      // ignore write failures (e.g. Safari private browsing)
+    }
   }, [])
 
   const toggleMode = useCallback(() => {
@@ -34,7 +46,11 @@ export function AppThemeProvider({ children }) {
 
   const setAccentColor = useCallback((next) => {
     setAccentColorState(next)
-    window.localStorage?.setItem(ACCENT_STORAGE_KEY, next)
+    try {
+      window.localStorage?.setItem(ACCENT_STORAGE_KEY, next)
+    } catch {
+      // ignore write failures (e.g. Safari private browsing)
+    }
   }, [])
 
   const theme = useMemo(() => createAppTheme(colorMode, accentColor), [colorMode, accentColor])
