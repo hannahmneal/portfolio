@@ -38,6 +38,7 @@ const buildCustom = (mode, styles) => ({
     pressedBg: styles.buttonPressedBg,
     pressedText: styles.buttonPressedText,
     pressedShadow: styles.buttonPressedShadow,
+    text: styles.text,
     minHeight: 44,
   },
   sunken: {
