@@ -11,9 +11,10 @@ const NAV_LINKS = [
 
 export default function Nav() {
   const theme = useTheme()
-  const { menuBar, link, hoverInvert, button, titleBar } = theme.custom
+  const { navBar, link, hoverInvert, button, titleBar } = theme.custom
   const accent = theme.palette.primary.main
   const text = theme.palette.text.primary
+  const boxIconShadow = navBar.boxIconShadow
 
   return (
     <Box
@@ -25,10 +26,10 @@ export default function Nav() {
         alignItems: 'center',
         gap: '4px',
         padding: '6px 16px',
-        minHeight: menuBar.minHeight,
-        bgcolor: menuBar.bg,
-        borderBottom: `2px solid ${menuBar.border}`,
-        boxShadow: menuBar.shadow,
+        minHeight: navBar.minHeight,
+        bgcolor: navBar.bg,
+        borderBottom: `2px solid ${navBar.border}`,
+        boxShadow: navBar.shadow,
       }}
     >
       <Box
@@ -44,6 +45,13 @@ export default function Nav() {
           fontSize: '20px',
           textDecoration: 'none',
           color: text,
+          padding: '9px 14px',
+          borderRadius: '4px',
+          '&:hover, &:focus-visible': {
+            bgcolor: hoverInvert.bg,
+            color: hoverInvert.text,
+            outline: 'none',
+          },
         }}
       >
         <Box
@@ -52,8 +60,8 @@ export default function Nav() {
             width: 20,
             height: 20,
             bgcolor: accent,
-            border: `1px solid ${text}`,
-            boxShadow: `2px 2px 0 ${text}`,
+            border: `1px solid ${boxIconShadow}`,
+            boxShadow: `2px 2px 0 ${boxIconShadow}`,
           }}
         />
         H.Neal
@@ -61,7 +69,7 @@ export default function Nav() {
 
       <Box
         aria-hidden="true"
-        sx={{ width: '1px', height: '26px', mx: '8px', bgcolor: menuBar.divider }}
+        sx={{ width: '1px', height: '26px', mx: '8px', bgcolor: navBar.divider }}
       />
 
       {NAV_LINKS.map(({ to, label }) => (
@@ -77,10 +85,7 @@ export default function Nav() {
             textDecoration: 'none',
             padding: '9px 14px',
             borderRadius: '4px',
-            color: link.color,
-            '&:visited': {
-              color: link.visited,
-            },
+            color: text,
             '&[aria-current="page"], &:hover, &:focus-visible': {
               bgcolor: hoverInvert.bg,
               color: hoverInvert.text,
@@ -110,7 +115,7 @@ export default function Nav() {
               width: 8,
               height: 8,
               bgcolor: accent,
-              border: `1px solid ${text}`,
+              border: `1px solid ${boxIconShadow}`,
               '@keyframes pc-blink': { '50%': { opacity: 0 } },
               animation: 'pc-blink 1s steps(1) infinite',
             }}

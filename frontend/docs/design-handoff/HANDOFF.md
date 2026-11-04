@@ -40,14 +40,14 @@ Default `#C8102E` (Swiss red). Alternatives: `#2B4FD8`, `#C2410C`, `#6B3FA0`.
 | window shadow | `inset 1px 1px 0 #FFFFFF, 4px 4px 0 rgba(26,26,26,0.35)` |
 | title bar bg | `#E2E2DE` |
 | title pinstripes | `repeating-linear-gradient(#FFFFFF 0 1px, #9A9A96 1px 2px)` |
-| menu bar bg | `#FFFFFF`, 2px bottom border `#1A1A1A`, `0 3px 0 rgba(26,26,26,0.18)` |
+| nav bar bg | `#FFFFFF`, 2px bottom border `#1A1A1A`, `0 3px 0 rgba(26,26,26,0.18)` |
 | banner | bg `#1A1A1A`, text `#D9D9D4` |
 | button | bg `#EEEEEB`, border `#1A1A1A`, `inset 1px 1px 0 #FFF, inset -1px -2px 0 #A8A8A4` |
 | button pressed | bg `#5E5E5A`, text `#FFF`, `inset 2px 2px 0 #2A2A28` |
 | sunken panel / input | bg `#FFFFFF`, border `#1A1A1A`, `inset 1px 1px 0 #9A9A96` |
 | link / visited | `#1F3FBF` / `#6B2C91`; hover inverts (bg = link colour, text white) |
 | footer | bg `#E2E2DE`, 2px top border `#1A1A1A` |
-| hover / current (menu, rows, icons) | invert: bg `#1A1A1A`, text `#FFFFFF` |
+| hover / current (nav, rows, icons) | invert: bg `#1A1A1A`, text `#FFFFFF` |
 
 ### Dark mode
 | Token | Value |
@@ -59,7 +59,7 @@ Default `#C8102E` (Swiss red). Alternatives: `#2B4FD8`, `#C2410C`, `#6B3FA0`.
 | window shadow | `inset 1px 1px 0 rgba(255,255,255,0.07), 5px 5px 0 rgba(0,0,0,0.55)` |
 | title bar bg | `#1F232A`; title text `#C9CDD3` |
 | title pinstripes | `repeating-linear-gradient(#2E333B 0 1px, #191C22 1px 2px)` |
-| menu bar bg | `#1B1F26` |
+| nav bar bg | `#1B1F26` |
 | banner | bg `#0B0D10`, text `#8E959D` |
 | button | bg `#2A2F37`, border `#07080A`, `inset 1px 1px 0 rgba(255,255,255,0.14), inset -1px -2px 0 rgba(0,0,0,0.55)` |
 | sunken panel / input | bg `#0B0D10`, border `#3A4048` |
@@ -136,7 +136,7 @@ The default stamp is smiley. When a stamp button is selected, it inverts (dark b
 - **Persisted preferences** (localStorage in the prototype): `hneal-theme` (`light` | `dark`), `hneal-pattern` (pattern id) and `hneal-project` (last opened project id).
 - **Theme switching**: both modes share all markup. Only the tokens change.
 - **Guestbook**: the prototype keeps entries in memory only. Production needs storage, plus moderation and spam protection, before it goes live.
-- **Responsive**: the menu bar and footer wrap, two-column window rows collapse at about 440px, and the Work list scrolls horizontally inside its panel.
+- **Responsive**: the nav bar and footer wrap, two-column window rows collapse at about 440px, and the Work list scrolls horizontally inside its panel.
 - **Accessibility**:
   - Real `<button>` and `<a>` elements, with `aria-pressed` on toggles and `aria-current="page"` on nav and footer links.
   - Visible dashed focus outlines.

@@ -19,11 +19,12 @@ const buildCustom = (mode, styles) => ({
     height: 26,
     boxSize: 13,
   },
-  menuBar: {
-    bg: styles.menuBarBg,
-    border: styles.menuBarBorder,
-    shadow: styles.menuBarShadow,
-    divider: styles.menuDivider,
+  navBar: {
+    bg: styles.navBarBg,
+    border: styles.navBarBorder,
+    shadow: styles.navBarShadow,
+    divider: styles.navDivider,
+    boxIconShadow: styles.navBarBoxIconShadow,
     minHeight: 56,
   },
   banner: {
