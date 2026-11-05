@@ -84,7 +84,7 @@ Default `#C8102E` (Swiss red). Alternatives: `#2B4FD8`, `#C2410C`, `#6B3FA0`.
 
 ## 3. Components
 
-- **Window**: 1px border, 6px radius. The 26px title bar has a 13px "box" at each end, pinstripes filling the space either side, and the title centred in Silkscreen.
+- **Window**: 1px border, 1px radius. The 26px title bar has a 13px "box" at each end, pinstripes filling the space either side, and the title centred in Silkscreen.
 - **Banner**: full width at the very top, 6px vertical padding. "PORTFOLIO.COM ▪" repeats and scrolls (`translateX(0 → -50%)`, 20s linear, two copies side by side).
 - **Menu bar (nav)**: min-height 56px. It holds the logo (an accent square with a 2px hard shadow, then "H.Neal" in Pixelify), a divider, then Home / About / Work / Now. The current page is inverted. On the right: a blinking accent square with "ONLINE · 2026", then the **Light mode / Dark mode** toggle button with a pixel sun/moon icon and `aria-pressed`.
 - **Buttons**, all at least 44px tall:

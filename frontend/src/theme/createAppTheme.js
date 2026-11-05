@@ -8,9 +8,10 @@ const buildCustom = (mode, styles) => ({
   window: {
     bg: styles.windowBg,
     border: styles.windowBorder,
+    borderRadius: 1,
     borderRing: styles.windowBorderRing,
+    margin: 24,
     shadow: styles.windowShadow,
-    borderRadius: 6,
   },
   titleBar: {
     bg: styles.titleBarBg,
