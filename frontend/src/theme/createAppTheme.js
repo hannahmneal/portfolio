@@ -35,12 +35,15 @@ const buildCustom = (mode, styles) => ({
   button: {
     bg: styles.buttonBg,
     border: styles.buttonBorder,
-    shadow: styles.buttonShadow,
     pressedBg: styles.buttonPressedBg,
     pressedText: styles.buttonPressedText,
     pressedShadow: styles.buttonPressedShadow,
     text: styles.text,
     minHeight: 44,
+    disabledBg: styles.buttonBgDisabled,
+    disabledText: styles.buttonTextDisabled,
+    disabledBorder: styles.buttonBorderDisabled,
+    ghostDisabled: styles.buttonGhostDisabled,
   },
   sunken: {
     bg: styles.sunkenBg,
@@ -81,6 +84,12 @@ export function createAppTheme(mode = 'light', accent = defaultAccent) {
       primary: {
         main: accent,
         contrastText: '#FFFFFF',
+        // 👇🏻 The primary button has a thick "ring" around it which comes from the latter half of this string. The secondary button does not have this ring.
+        buttonShadow: 'inset 1px 1px 0 rgba(255,255,255,0.4), inset -1px -2px 0 rgba(0,0,0,0.3), 0 0 0 3px #EEEEEB, 0 0 0 5px #1A1A1A',
+      },
+      secondary: {
+        main: '#2A2F37',
+        buttonShadow: 'inset 1px 1px 0px rgba(255,255,255,0.14), inset -1px -2px 0px rgba(0,0,0,0.55)',
       },
     },
     typography,

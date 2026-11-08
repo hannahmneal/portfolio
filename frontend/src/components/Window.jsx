@@ -82,7 +82,9 @@ export function Window({ title, children }) {
                 <TitleStripes />
                 <TitleBox />
             </Box>
-                {children}
+                <>
+                    {children}
+                </>
         </Box>
     )
 }

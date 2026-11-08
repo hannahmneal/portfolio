@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { NavLink } from 'react-router'
-import { ThemeButton } from '../Buttons/ThemeButton'
+import { ThemeButton } from '../components/Buttons'
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
