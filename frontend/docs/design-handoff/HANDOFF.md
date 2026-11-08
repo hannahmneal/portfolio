@@ -42,8 +42,10 @@ Default `#C8102E` (Swiss red). Alternatives: `#2B4FD8`, `#C2410C`, `#6B3FA0`.
 | title pinstripes | `repeating-linear-gradient(#FFFFFF 0 1px, #9A9A96 1px 2px)` |
 | nav bar bg | `#FFFFFF`, 2px bottom border `#1A1A1A`, `0 3px 0 rgba(26,26,26,0.18)` |
 | banner | bg `#1A1A1A`, text `#D9D9D4` |
-| button | bg `#EEEEEB`, border `#1A1A1A`, `inset 1px 1px 0 #FFF, inset -1px -2px 0 #A8A8A4` |
+| button | bg `#EEEEEB`, border `#1A1A1A`; bevel is shared with dark mode (see **Buttons** below) |
 | button pressed | bg `#5E5E5A`, text `#FFF`, `inset 2px 2px 0 #2A2A28` |
+| button disabled | bg `#9A9A96`, text `#3E3E3B`, border `1px solid transparent`, no bevel |
+| ghost button disabled | text `#90908C`, keeps its underline |
 | sunken panel / input | bg `#FFFFFF`, border `#1A1A1A`, `inset 1px 1px 0 #9A9A96` |
 | link / visited | `#1F3FBF` / `#6B2C91`; hover inverts (bg = link colour, text white) |
 | footer | bg `#E2E2DE`, 2px top border `#1A1A1A` |
@@ -61,7 +63,9 @@ Default `#C8102E` (Swiss red). Alternatives: `#2B4FD8`, `#C2410C`, `#6B3FA0`.
 | title pinstripes | `repeating-linear-gradient(#2E333B 0 1px, #191C22 1px 2px)` |
 | nav bar bg | `#1B1F26` |
 | banner | bg `#0B0D10`, text `#8E959D` |
-| button | bg `#2A2F37`, border `#07080A`, `inset 1px 1px 0 rgba(255,255,255,0.14), inset -1px -2px 0 rgba(0,0,0,0.55)` |
+| button | bg `#2A2F37`, border `#07080A`; bevel is shared with light mode (see **Buttons** below) |
+| button pressed | not defined |
+| button disabled | bg `#9A9A96`, text `#3E3E3B`, border `1px solid transparent`, no bevel (shared with light mode) |
 | sunken panel / input | bg `#0B0D10`, border `#3A4048` |
 | link / visited | `#67E8F9` / `#C9A7F2`; hover inverts (text `#0B0D10`) |
 | footer | bg `#1B1F26` |
@@ -87,11 +91,16 @@ Default `#C8102E` (Swiss red). Alternatives: `#2B4FD8`, `#C2410C`, `#6B3FA0`.
 - **Window**: 1px border, 1px radius. The 26px title bar has a 13px "box" at each end, pinstripes filling the space either side, and the title centred in Silkscreen.
 - **Banner**: full width at the very top, 6px vertical padding. "PORTFOLIO.COM ▪" repeats and scrolls (`translateX(0 → -50%)`, 20s linear, two copies side by side).
 - **Menu bar (nav)**: min-height 56px. It holds the logo (an accent square with a 2px hard shadow, then "H.Neal" in Pixelify), a divider, then Home / About / Work / Now. The current page is inverted. On the right: a blinking accent square with "ONLINE · 2026", then the **Light mode / Dark mode** toggle button with a pixel sun/moon icon and `aria-pressed`.
-- **Buttons**, all at least 44px tall:
-  - Primary: accent background (i.e., Swiss red), white text, plus a thick "default ring" `0 0 0 3px <window bg>, 0 0 0 5px <text>`. Hover brightens it.
-  - Secondary: the bevelled grey button.
-  - Ghost: underlined text that inverts on hover.
-  - Disabled: muted colours with no bevel.
+- **Buttons** (`src/components/Buttons.jsx`), all at least 44px tall. Shared box: `min-height: 44px`, `padding: 0 14px`, `border-radius: 7px`, `gap: 10px`, `display: inline-flex`, `align-items: center`, IBM Plex Sans 600 at 14px, `cursor: pointer`. The pressed look applies both on `:active` and on `aria-pressed="true"`, and every hover and pressed rule is guarded by `:not(:disabled)`.
+  - Two bevels, each mode-independent, held on the palette rather than in the per-mode tokens:
+    - Primary, bevel plus the thick "default ring": `inset 1px 1px 0 rgba(255,255,255,0.4), inset -1px -2px 0 rgba(0,0,0,0.3), 0 0 0 3px #EEEEEB, 0 0 0 5px #1A1A1A`
+    - Secondary: `inset 1px 1px 0 rgba(255,255,255,0.14), inset -1px -2px 0 rgba(0,0,0,0.55)`
+  - Primary: accent background (Swiss red by default), white text, a 1px border in the mode's button border colour, the primary bevel, and `margin: 1rem` to leave the ring room. Hover brightens by `1.12`. Pressed drops to the grey pressed tokens and loses the ring.
+  - Secondary: the mode's button background, text and border with the secondary bevel, and no margin of its own. Hover brightens by `1.12`. Pressed as above.
+  - Ghost: transparent background, a `1px solid transparent` border so it lines up with its siblings, no bevel, `margin: 1rem`, and its label underlined at `2px` with a `4px` offset. Hover and pressed both invert to the hover/current tokens, drop the underline and cancel the shared brightness filter.
+  - Disabled: the native `disabled` attribute drives `:disabled`, so clicks and focus are blocked by the browser. Muted colours, no bevel, `cursor: not-allowed`, and no hover or pressed response. Ghost stays transparent and keeps its underline.
+  - Theme toggle: the shared base look, with `aria-pressed` reflecting dark mode.
+  - **Not defined in dark mode**: the pressed tokens (`buttonPressedBg` / `buttonPressedText` / `buttonPressedShadow`) and the ghost disabled colour. Pressing a non-ghost button in dark mode is therefore a no-op, and the primary ring still uses the light `#EEEEEB` / `#1A1A1A` in both modes.
 - **Desktop icon**: a 72px pixel-art glyph (16×16 grid, `shape-rendering: crispEdges`) over a bordered label box with a title and a short description. Hover or focus darkens the glyph and inverts the label.
 - **Pattern picker**: square swatch buttons with `aria-pressed`. The selected one gets the ring `0 0 0 3px <window bg>, 0 0 0 5px <accent>`.
 - **Footer**:

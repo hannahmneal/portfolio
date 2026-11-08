@@ -23,7 +23,6 @@ const BaseButtonStyles = styled('button')(({ theme }) => {
         border: `1px solid ${button.border}`,
         backgroundColor: button.bg,
         color: button.text,
-        boxShadow: button.shadow,
         cursor: 'pointer',
         [HOVER]: { filter: 'brightness(1.12)' },
         [PRESSED]: {
@@ -74,7 +73,6 @@ export function PrimaryButton(props) {
                     boxShadow: theme.custom.button.pressedShadow,
                 },
             })}
-            {...props}
         />
     )
 }
@@ -86,6 +84,7 @@ export function SecondaryButton(props) {
             sx={(theme) => {
                 const { button } = theme.custom
                 return {
+                    margin: '1rem',
                     boxShadow: theme.palette.secondary.buttonShadow,
                     [DISABLED]: {
                         color: button.buttonPressedBg
@@ -141,6 +140,11 @@ export function ThemeButton() {
 
     return (
         <ButtonBase
+            sx={(theme) => {
+                return {
+                    boxShadow: theme.palette.secondary.buttonShadow,
+                }
+            }}
             onClick={toggleMode}
             pressed={isDark}
             icon={isDark ? <SunIcon /> : <MoonIcon />}
