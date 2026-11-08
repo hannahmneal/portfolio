@@ -27,7 +27,7 @@ What the owner liked (keep these):
 
 ## 2. Tokens
 
-### Accent (one colour, user-selectable; white text must pass on it)
+### Accent (one colour, user-selectable; white text must pass accessibility testing on it)
 Default `#C8102E` (Swiss red). Alternatives: `#2B4FD8`, `#C2410C`, `#6B3FA0`.
 
 ### Light mode
@@ -88,7 +88,7 @@ Default `#C8102E` (Swiss red). Alternatives: `#2B4FD8`, `#C2410C`, `#6B3FA0`.
 - **Banner**: full width at the very top, 6px vertical padding. "PORTFOLIO.COM ▪" repeats and scrolls (`translateX(0 → -50%)`, 20s linear, two copies side by side).
 - **Menu bar (nav)**: min-height 56px. It holds the logo (an accent square with a 2px hard shadow, then "H.Neal" in Pixelify), a divider, then Home / About / Work / Now. The current page is inverted. On the right: a blinking accent square with "ONLINE · 2026", then the **Light mode / Dark mode** toggle button with a pixel sun/moon icon and `aria-pressed`.
 - **Buttons**, all at least 44px tall:
-  - Primary: accent background, white text, plus a thick "default ring" `0 0 0 3px <window bg>, 0 0 0 5px <text>`. Hover brightens it.
+  - Primary: accent background (i.e., Swiss red), white text, plus a thick "default ring" `0 0 0 3px <window bg>, 0 0 0 5px <text>`. Hover brightens it.
   - Secondary: the bevelled grey button.
   - Ghost: underlined text that inverts on hover.
   - Disabled: muted colours with no bevel.
