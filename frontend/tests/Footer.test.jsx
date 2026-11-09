@@ -51,11 +51,11 @@ test.each([
 
 test('shows the status bar panes', () => {
   renderFooterAtPath('/')
-  expect(screen.getByText('Status: online')).toBeInTheDocument()
+  expect(screen.getByText('Status: online & sleepy')).toBeInTheDocument()
   expect(screen.getByText(/Last updated: 2026/)).toBeInTheDocument()
   expect(screen.getByText('Visitors')).toBeInTheDocument()
   expect(screen.getByText('Loading')).toBeInTheDocument()
-  expect(screen.getByText('Made with nothing but CSS')).toBeInTheDocument()
+  expect(screen.getByText('Made with 🥐, ☕️, 🎧, and ❤️.')).toBeInTheDocument()
 })
 
 test('announces the visitor count once rather than per digit tile', () => {
