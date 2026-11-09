@@ -1,5 +1,7 @@
+import { Box } from '@mui/material'
 import { Routes, Route } from 'react-router'
 import Nav from './components/Nav'
+import Footer from './components/Footer'
 import Home from './pages/Home'
 import About from './pages/About'
 import Work from './pages/Work'
@@ -9,7 +11,11 @@ import NotFound from './pages/NotFound'
 
 export default function App() {
   return (
-    <>
+    // id="top" is the target for the footer's "Back to top" link.
+    <Box
+      id="top"
+      sx={{ minHeight: '100svh', display: 'flex', flexDirection: 'column', width: '100%' }}
+    >
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -19,6 +25,7 @@ export default function App() {
         <Route path="/guestbook" element={<Guestbook />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+      <Footer />
+    </Box>
   )
 }

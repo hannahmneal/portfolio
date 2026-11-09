@@ -20,7 +20,7 @@ A late-90s Mac-OS-"Platinum"-style desktop, rebuilt with modern spacing and acce
 What the owner liked (keep these):
 - Window chrome around each section, plus old-style bevelled buttons.
 - Desktop icons as menu blocks, and the desktop-pattern picker.
-- Stepped, GIF-like animations: the hopping pixel H, blinking crosshair sparkles and a barber-pole loading bar.
+- Stepped, GIF-like animations: the hopping pixel H, blinking crosshair sparkles and a barber-pole-style loading bar.
 - A slim scrolling banner **above** the nav, and a nav that is obvious but doesn't overpower the banner.
 - A classic footer with status, last updated and a visitor counter.
 - Fonts: Pixelify Sans, Silkscreen, IBM Plex Sans and IBM Plex Mono.
@@ -109,7 +109,7 @@ Default `#C8102E` (Swiss red). Alternatives: `#2B4FD8`, `#C2410C`, `#6B3FA0`.
     - "Status: online", with a blinking accent square.
     - "Last updated: 2026".
     - "Visitors", shown as digit tiles 0 0 1 3 3 7.
-    - "Loading", with a barber pole: `repeating-linear-gradient(-45deg, accent 0 8px, <window bg> 8px 16px)`, animating `background-position` by 22.63px.
+    - "Loading", with a barber-pole-style bar: `repeating-linear-gradient(-45deg, accent 0 8px, <window bg> 8px 16px)`, animating `background-position` by 22.63px.
     - "Made with nothing but CSS".
 - **Animations** (stepped, not smooth):
   - Pixel H hop: `steps(3)` over 1.2s.

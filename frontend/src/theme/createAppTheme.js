@@ -58,6 +58,25 @@ const buildCustom = (mode, styles) => ({
   footer: {
     bg: styles.footerBg,
     border: styles.footerBorder,
+    shadow: styles.footerShadow,
+    pipe: styles.footerPipe,
+    boxIconShadow: styles.navBarBoxIconShadow,
+    pane: {
+      bg: styles.footerPaneBg,
+      border: styles.footerPaneBorder,
+      shadow: styles.footerPaneShadow,
+      minHeight: 38,
+    },
+    digit: {
+      bg: styles.footerDigitBg,
+      text: styles.footerDigitText,
+      border: styles.footerDigitBorder,
+    },
+    loadingBar: {
+      border: styles.footerLoadingBarBorder,
+      track: styles.footerLoadingBarTrack,
+    },
+    maxWidth: 1180,
   },
   hoverInvert: {
     bg: styles.hoverInvertBg,
