@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import { Routes, Route } from 'react-router'
+import Banner from './components/Banner'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import Home from './pages/Home'
@@ -16,6 +17,7 @@ export default function App() {
       id="top"
       sx={{ minHeight: '100svh', display: 'flex', flexDirection: 'column', width: '100%' }}
     >
+      <Banner />
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />

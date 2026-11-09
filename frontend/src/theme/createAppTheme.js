@@ -31,6 +31,12 @@ const buildCustom = (mode, styles) => ({
   banner: {
     bg: styles.bannerBg,
     text: styles.bannerText,
+    // 👇🏻 Only dark mode draws a hairline under the banner.
+    borderBottom: styles.bannerBorder,
+    paddingY: 6,
+    fontSize: 13,
+    // One full loop of two copies of the marquee
+    duration: '20s',
   },
   button: {
     bg: styles.buttonBg,
