@@ -207,14 +207,14 @@ export default function Footer() {
               sx={{
                 width: 110,
                 height: 14,
-                border: `1px solid ${footer.barber.border}`,
+                border: `1px solid ${footer.loadingBar.border}`,
                 borderRadius: '3px',
-                background: `repeating-linear-gradient(-45deg, ${accent} 0 8px, ${footer.barber.track} 8px 16px)`,
-                '@keyframes pc-barber': {
+                background: `repeating-linear-gradient(-45deg, ${accent} 0 8px, ${footer.loadingBar.track} 8px 16px)`,
+                '@keyframes pc-loadingBar': {
                   '0%': { backgroundPosition: '0 0' },
                   '100%': { backgroundPosition: '22.63px 0' },
                 },
-                animation: 'pc-barber 0.8s linear infinite',
+                animation: 'pc-loadingBar 0.8s linear infinite',
               }}
             />
           </Box>

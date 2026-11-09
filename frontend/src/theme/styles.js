@@ -51,8 +51,8 @@ export const lightStyles = {
   footerDigitBg: '#1A1A1A',
   footerDigitText: '#FFFFFF',
   footerDigitBorder: 'none',
-  footerBarberBorder: '#1A1A1A',
-  footerBarberTrack: '#EEEEEB',
+  footerLoadingBarBorder: '#1A1A1A',
+  footerLoadingBarTrack: '#EEEEEB',
   hoverInvertBg: '#1A1A1A',
   hoverInvertText: '#FFFFFF',
 }
@@ -93,8 +93,8 @@ export const darkStyles = {
   footerDigitBg: '#0B0D10',
   footerDigitText: '#F3EFE6',
   footerDigitBorder: '1px solid #3A4048',
-  footerBarberBorder: '#07080A',
-  footerBarberTrack: '#262B33',
+  footerLoadingBarBorder: '#07080A',
+  footerLoadingBarTrack: '#262B33',
   hoverInvertBg: '#F3EFE6',
   hoverInvertText: '#0B0D10',
 }

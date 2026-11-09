@@ -72,9 +72,9 @@ const buildCustom = (mode, styles) => ({
       text: styles.footerDigitText,
       border: styles.footerDigitBorder,
     },
-    barber: {
-      border: styles.footerBarberBorder,
-      track: styles.footerBarberTrack,
+    loadingBar: {
+      border: styles.footerLoadingBarBorder,
+      track: styles.footerLoadingBarTrack,
     },
     maxWidth: 1180,
   },
