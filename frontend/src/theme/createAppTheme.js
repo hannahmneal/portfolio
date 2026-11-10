@@ -8,9 +8,10 @@ const buildCustom = (mode, styles) => ({
   window: {
     bg: styles.windowBg,
     border: styles.windowBorder,
+    borderRadius: 1,
     borderRing: styles.windowBorderRing,
+    margin: 24,
     shadow: styles.windowShadow,
-    borderRadius: 6,
   },
   titleBar: {
     bg: styles.titleBarBg,
@@ -19,24 +20,36 @@ const buildCustom = (mode, styles) => ({
     height: 26,
     boxSize: 13,
   },
-  menuBar: {
-    bg: styles.menuBarBg,
-    border: styles.menuBarBorder,
-    shadow: styles.menuBarShadow,
+  navBar: {
+    bg: styles.navBarBg,
+    border: styles.navBarBorder,
+    shadow: styles.navBarShadow,
+    divider: styles.navDivider,
+    boxIconShadow: styles.navBarBoxIconShadow,
     minHeight: 56,
   },
   banner: {
     bg: styles.bannerBg,
     text: styles.bannerText,
+    // 👇🏻 Only dark mode draws a hairline under the banner.
+    borderBottom: styles.bannerBorder,
+    paddingY: 6,
+    fontSize: 13,
+    // One full loop of two copies of the marquee
+    duration: '20s',
   },
   button: {
     bg: styles.buttonBg,
     border: styles.buttonBorder,
-    shadow: styles.buttonShadow,
     pressedBg: styles.buttonPressedBg,
     pressedText: styles.buttonPressedText,
     pressedShadow: styles.buttonPressedShadow,
+    text: styles.text,
     minHeight: 44,
+    disabledBg: styles.buttonBgDisabled,
+    disabledText: styles.buttonTextDisabled,
+    disabledBorder: styles.buttonBorderDisabled,
+    ghostDisabled: styles.buttonGhostDisabled,
   },
   sunken: {
     bg: styles.sunkenBg,
@@ -51,6 +64,25 @@ const buildCustom = (mode, styles) => ({
   footer: {
     bg: styles.footerBg,
     border: styles.footerBorder,
+    shadow: styles.footerShadow,
+    pipe: styles.footerPipe,
+    boxIconShadow: styles.navBarBoxIconShadow,
+    pane: {
+      bg: styles.footerPaneBg,
+      border: styles.footerPaneBorder,
+      shadow: styles.footerPaneShadow,
+      minHeight: 38,
+    },
+    digit: {
+      bg: styles.footerDigitBg,
+      text: styles.footerDigitText,
+      border: styles.footerDigitBorder,
+    },
+    loadingBar: {
+      border: styles.footerLoadingBarBorder,
+      track: styles.footerLoadingBarTrack,
+    },
+    maxWidth: 1180,
   },
   hoverInvert: {
     bg: styles.hoverInvertBg,
@@ -77,6 +109,12 @@ export function createAppTheme(mode = 'light', accent = defaultAccent) {
       primary: {
         main: accent,
         contrastText: '#FFFFFF',
+        // 👇🏻 The primary button has a thick "ring" around it which comes from the latter half of this string. The secondary button does not have this ring.
+        buttonShadow: 'inset 1px 1px 0 rgba(255,255,255,0.4), inset -1px -2px 0 rgba(0,0,0,0.3), 0 0 0 3px #EEEEEB, 0 0 0 5px #1A1A1A',
+      },
+      secondary: {
+        main: '#2A2F37',
+        buttonShadow: 'inset 1px 1px 0px rgba(255,255,255,0.14), inset -1px -2px 0px rgba(0,0,0,0.55)',
       },
     },
     typography,

@@ -1,31 +1,33 @@
-// import { useEffect, useState } from 'react'
-import './App.css'
-
-const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3001"
+import { Box } from '@mui/material'
+import { Routes, Route } from 'react-router'
+import Banner from './components/Banner'
+import Nav from './components/Nav'
+import Footer from './components/Footer'
+import Home from './pages/Home'
+import About from './pages/About'
+import Work from './pages/Work'
+import Now from './pages/Now'
+import Guestbook from './pages/Guestbook'
+import NotFound from './pages/NotFound'
 
 export default function App() {
-  // TODO: Un-comment when backend/API is ready:
-  
-  // const [status, setStatus] = useState(null)
-
-  // useEffect(() => {
-  //   fetch(`${API_URL}/health`)
-  //     .then(r => r.json())
-  //     .then(d => setStatus(d.status))
-  //     .catch(() => setStatus("unreachable"))
-  // }, [])
-
   return (
-    <>
-      <section id="center">
-        <div className="hero" />
-        <div>
-          <h1>Coming soon!</h1>
-          <p>
-            This is the home for my professional portfolio.
-          </p>
-        </div>
-      </section>
-    </>
+    // id="top" is the target for the footer's "Back to top" link.
+    <Box
+      id="top"
+      sx={{ minHeight: '100svh', display: 'flex', flexDirection: 'column', width: '100%' }}
+    >
+      <Banner />
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/work" element={<Work />} />
+        <Route path="/now" element={<Now />} />
+        <Route path="/guestbook" element={<Guestbook />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
+    </Box>
   )
 }

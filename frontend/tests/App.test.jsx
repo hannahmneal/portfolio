@@ -1,12 +1,30 @@
 import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router'
 import App from '../src/App'
+import { AppThemeProvider } from '../src/theme'
 
-test('renders the "coming soon" heading', () => {
-    render(<App />)
-    expect(screen.getByRole('heading', { name: /coming soon/i })).toBeInTheDocument()
+function renderAtPath(path) {
+  return render(
+    <MemoryRouter initialEntries={[path]}>
+      <AppThemeProvider>
+        <App />
+      </AppThemeProvider>
+    </MemoryRouter>,
+  )
+}
+
+test.each([
+  ['/', 'Home'],
+  ['/about', 'About'],
+  ['/work', 'Work'],
+  ['/now', 'Now'],
+  ['/guestbook', 'Guestbook'],
+])('renders the %s route heading', (path, heading) => {
+  renderAtPath(path)
+  expect(screen.getByRole('heading', { name: heading })).toBeInTheDocument()
 })
 
-test('renders the portfolio description', () => {
-    render(<App />)
-    expect(screen.getByText(/professional portfolio/i)).toBeInTheDocument()
+test('renders a not-found heading for an unknown route', () => {
+  renderAtPath('/not-found')
+  expect(screen.getByRole('heading', { name: /not found/i })).toBeInTheDocument()
 })
