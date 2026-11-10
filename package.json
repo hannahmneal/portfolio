@@ -3,7 +3,7 @@
     "ulid": "^3.0.2"
   },
   "devDependencies": {
-    "wrangler": "^4.96.0"
+    "wrangler": "^4.159.0"
   },
   "scripts": {
     "deploy": "wrangler deploy",
