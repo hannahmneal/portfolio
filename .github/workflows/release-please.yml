@@ -1,0 +1,34 @@
+name: Release Please
+
+# Maintains the single source of truth for this repo's version.
+#
+# On every push to main this opens (or updates) a release PR that bumps
+# version.txt, both package.json files and their lockfiles, and writes
+# CHANGELOG.md from the conventional-commit messages since the last release.
+# Merging that PR tags the repo and publishes a GitHub Release - which is
+# what deploy.yml listens for (`release: published`), so the backend image
+# build and Render redeploy still happen exactly as they do today.
+#
+# IMPORTANT: this needs a PAT in secrets.RELEASE_PLEASE_TOKEN (a fine-grained
+# token with Contents: read/write and Pull requests: read/write on this repo).
+# A release published by the default GITHUB_TOKEN does NOT trigger other
+# workflows, so with GITHUB_TOKEN alone the release is created but deploy.yml
+# never fires and the backend is silently never shipped.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json

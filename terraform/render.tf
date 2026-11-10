@@ -25,6 +25,9 @@ resource "render_web_service" "portfolio_api" {
     image = {
       image_url = var.image_repository
       tag       = "latest"
+      # Lets Render pull the image while it stays private on GHCR - see the
+      # APPLY WARNING in ghcr.tf before the first apply with this attached.
+      registry_credential_id = render_registry_credential.ghcr.id
     }
   }
 
