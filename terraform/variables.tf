@@ -62,15 +62,3 @@ variable "api_subdomain" {
   type        = string
   default     = "api"
 }
-
-variable "ghcr_read_token" {
-  description = <<-DESC
-    GitHub token with read:packages, used by Render to pull the private
-    backend image from GHCR. Set this as a sensitive workspace variable in
-    Terraform Cloud (RedQueenVentures org > portfolio workspace > Variables).
-    Supplying this removes the need to make the GHCR package public by hand
-    after every package recreation.
-  DESC
-  type        = string
-  sensitive   = true
-}
