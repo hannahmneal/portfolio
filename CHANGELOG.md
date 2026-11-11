@@ -10,6 +10,14 @@ writing commit messages like `feat: add contact form`, not by editing here.
 The version in `version.txt`, `frontend/package.json` and
 `backend/package.json` is kept in sync with the most recent release tag.
 
+## [0.3.1](https://github.com/hannahmneal/portfolio/compare/v0.3.0...v0.3.1) (2026-11-10)
+
+
+### Infrastructure
+
+* automate versioning with release-please and private GHCR pulls ([b1a035c](https://github.com/hannahmneal/portfolio/commit/b1a035c53a55ef18d2e43943559123ea86abc4d4))
+* defer GHCR registry credential to its own change ([a692c5e](https://github.com/hannahmneal/portfolio/commit/a692c5e07c920c8261643398ee0ba1dafa86301b))
+
 ## 0.3.0 (2026-10-28)
 
 Version baseline for the `0.x` series. Before this, no `package.json` in the
