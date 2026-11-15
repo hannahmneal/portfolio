@@ -10,6 +10,14 @@ writing commit messages like `feat: add contact form`, not by editing here.
 The version in `version.txt`, `frontend/package.json` and
 `backend/package.json` is kept in sync with the most recent release tag.
 
+## [0.3.2](https://github.com/hannahmneal/portfolio/compare/v0.3.1...v0.3.2) (2026-11-11)
+
+
+### Bug Fixes
+
+* **deps:** force minimatch &gt;=11.0.1 to clear GHSA-g3hv-75wg-m249 ([aba65ef](https://github.com/hannahmneal/portfolio/commit/aba65efbfde1e69f63441fd32eddbd53c5028a82))
+* **deps:** force minimatch &gt;=11.0.1 to clear GHSA-g3hv-75wg-m249 ([52f11d7](https://github.com/hannahmneal/portfolio/commit/52f11d74173134f9b8dc891d8503191cd7b968d4))
+
 ## [0.3.1](https://github.com/hannahmneal/portfolio/compare/v0.3.0...v0.3.1) (2026-11-10)
 
 

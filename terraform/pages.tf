@@ -1,3 +1,10 @@
+locals {
+  pages_function_env = {
+    "API_BASE_URL" = { type = "plain_text", value = "https://${var.api_subdomain}.${var.domain}" }
+    "API_KEY"      = { type = "secret_text", value = var.api_proxy_key }
+  }
+}
+
 resource "cloudflare_pages_project" "portfolio" {
   account_id        = var.cloudflare_account_id
   name              = "portfolio"
@@ -7,6 +14,23 @@ resource "cloudflare_pages_project" "portfolio" {
     build_command   = "npm run build"
     destination_dir = "dist"
     root_dir        = "frontend"
+  }
+
+  # Environment for builds AND Pages Functions. The function in
+  # frontend/functions/api/[[path]].js uses these to reach the private API.
+  # API_KEY is READ-scoped (see var.api_proxy_key) because this component is
+  # reachable by anyone, and is stored as secret_text so Cloudflare does not
+  # hand it back on read.
+  #
+  # Preview deployments get the same values: preview URLs are public, which is
+  # exactly why the key is read-only.
+  #
+  # Rotating: add the new key to the API's API_KEYS first, change
+  # api_proxy_key here, then drop the old key from API_KEYS - that order means
+  # no live deployment ever holds a key the API no longer accepts.
+  deployment_configs = {
+    production = { env_vars = local.pages_function_env }
+    preview    = { env_vars = local.pages_function_env }
   }
 
   source = {

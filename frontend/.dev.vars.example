@@ -1,0 +1,14 @@
+# Copy to frontend/.dev.vars (gitignored) for `npx wrangler pages dev`.
+# These are read by the Pages Function in functions/api/[[path]].js.
+#
+# In production the same two names are set in Cloudflare Pages >
+# portfolio > Settings > Variables and secrets, with API_KEY as a SECRET.
+# Do not put quotations around values here, and never commit a real key.
+#
+# API_KEY must be a READ-scoped key from the API's API_KEYS list - the entry
+# labelled e.g. `pages-proxy:read:<key>`. Paste only the <key> part here, not
+# the label or scope. A write-scoped key here would hand write access to a
+# public-facing component.
+
+API_BASE_URL=https://api.redqueen.run
+API_KEY=replace-with-the-read-scoped-key-from-API_KEYS
