@@ -31,7 +31,7 @@ test('GET projects without a key is rejected', async () => {
 
 test('a wrong key is rejected', async () => {
     const res = await request(app)
-        .get(`${BASE}/users`)
+        .get(`${BASE}/projects`)
         .set('Authorization', `Bearer ${'z'.repeat(40)}`)
     assert.equal(res.status, 401)
 })
@@ -42,6 +42,13 @@ test('x-api-key header is accepted as well as Bearer', async () => {
         .set('x-api-key', WRITE_KEY)
         .send({})
     assert.equal(res.status, 400)  // reached validation, so the key was accepted
+})
+
+test('the users route is gone, even for a valid key', async () => {
+    const res = await request(app)
+        .get(`${BASE}/users`)
+        .set('Authorization', `Bearer ${READ_KEY}`)
+    assert.equal(res.status, 404)
 })
 
 test('unauthenticated callers cannot map which routes exist', async () => {

@@ -104,6 +104,14 @@ export function requireApiKey(keys = loadApiKeys()) {
         const presented = presentedKey(req)
 
         if (!presented) {
+            // Logged distinctly from a wrong key: this means no credential
+            // arrived at all, or the Authorization header could not be parsed
+            // (e.g. a missing space after "Bearer"). Neither branch logs the
+            // presented value.
+            console.warn(
+                `Rejected ${req.method} ${req.originalUrl} from ${req.ip}: ` +
+                "no API key presented"
+            )
             res.set("WWW-Authenticate", "Bearer")
             return res.status(401).json({ error: "Unauthorized" })
         }

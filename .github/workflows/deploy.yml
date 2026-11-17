@@ -121,6 +121,44 @@ jobs:
       - run: terraform validate
       - run: terraform apply -auto-approve
 
+      # Database migrations, between `apply` and the redeploy on purpose.
+      #
+      # The API connects with search_path=portfolio, so the schema has to exist
+      # before the new image boots or every query fails with "relation does not
+      # exist". Running here means a failed migration fails the job BEFORE the
+      # deploy hook fires, leaving the current (working) release serving.
+      #
+      # The connection URI comes from the Terraform output rather than a
+      # separate GitHub secret, so it is by construction the same database
+      # Render is pointed at - one fewer value to rotate, and it cannot drift.
+      - name: Read database URI from Terraform
+        id: db
+        run: |
+          uri="$(terraform output -raw neon_connection_uri)"
+          if [ -z "$uri" ]; then
+            echo "::error::neon_connection_uri output was empty"
+            exit 1
+          fi
+          # Keep it out of the logs even if a later step echoes it.
+          echo "::add-mask::$uri"
+          echo "DATABASE_URL=$uri" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install backend dependencies
+        run: npm ci --omit=dev
+        working-directory: backend
+
+      - name: Show pending migrations
+        run: npm run migrate:dry
+        working-directory: backend
+
+      - name: Apply migrations
+        run: npm run migrate
+        working-directory: backend
+
       # render_web_service is pinned to the "latest" tag on purpose (see the
       # comment in render.tf) - `terraform apply` above only provisions
       # infra, it never tells Render to pull the image build-and-push just

@@ -66,7 +66,7 @@ describe('allowlisted routes', () => {
 
 describe('everything not allowlisted is refused at the edge', () => {
     test.each([
-        ['portfolio/users', 'GET'],       // private route
+        ['portfolio/users', 'GET'],       // no longer exists on the API either
         ['portfolio/projects', 'POST'],   // content write
         ['portfolio/projects', 'PATCH'],  // content write
         ['portfolio/projects', 'DELETE'],

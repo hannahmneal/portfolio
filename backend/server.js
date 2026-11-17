@@ -87,19 +87,14 @@ const api = express.Router()
 app.use("/portfolio", api)
 
 // ---------------------------------------------------------------------------
-// Users — read all users from the database
+// There is deliberately no /users route. It existed only for me, and
+// "holds a valid key" is not the same as "is Hannah" — so it was surface
+// without a purpose. It also returned SELECT *, including email, and the
+// read-scoped key the Pages proxy holds could call it: a leaked edge secret
+// would have handed over addresses, where the same key against /projects only
+// exposes what the site already shows. The portfolio.users table stays; only
+// the route is gone.
 // ---------------------------------------------------------------------------
-api.get("/users", async (_req, res) => {
-    try {
-        const { rows } = await pool.query(
-            "SELECT * FROM users ORDER BY created_at DESC"
-        )
-        res.json(rows)
-    } catch (err) {
-        console.error("GET /portfolio/users error:", err)
-        res.status(500).json({ error: "Failed to fetch users" })
-    }
-})
 
 // ---------------------------------------------------------------------------
 // Projects — read all portfolio projects from the database

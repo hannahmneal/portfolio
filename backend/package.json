@@ -6,6 +6,8 @@
   "scripts": {
     "test": "NODE_ENV=test API_KEYS=test-writer:write:wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww,test-reader:read:rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr node --experimental-vm-modules --test tests/*.test.js",
     "start": "node server.js",
+    "migrate": "node migrate.js",
+    "migrate:dry": "node migrate.js --dry-run",
     "dev": "nodemon server.js"
   },
   "keywords": [],
