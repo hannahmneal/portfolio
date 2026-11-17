@@ -1,0 +1,24 @@
+-- 004_remove_users_seed.sql
+--
+-- Removes the seeded placeholder user.
+--
+-- 002 seeded a user named "Test" so a fresh database had something in every
+-- table. That stopped making sense when GET /portfolio/users was removed:
+-- nothing in the application reads or writes portfolio.users any more, so the
+-- row was a fake person sitting in production, reachable by nothing, inserted
+-- again on every deploy by a seed that runs in CI.
+--
+-- Deleted by primary key rather than by a predicate like email LIKE '%.test',
+-- so this can only ever remove the exact row 002 inserted. If you later add
+-- real users, this migration cannot touch them.
+--
+-- WHY NOT JUST EDIT 002: it has already run. Editing it would leave databases
+-- that applied the old version and databases that applied the new one with the
+-- same shape and different histories — the drift this whole setup exists to
+-- prevent (see 003). So on a fresh database 002 inserts the row and 004
+-- removes it. The net effect is the same, and the ledger stays truthful.
+--
+-- The portfolio.users table itself is deliberately kept: it costs nothing
+-- empty, and dropping it is a one-line migration whenever that is wanted.
+
+DELETE FROM portfolio.users WHERE id = '01KT2Y0J95EATCKP7CMNEM4JZ7';
