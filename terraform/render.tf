@@ -28,9 +28,17 @@ resource "render_web_service" "portfolio_api" {
     }
   }
 
+  # NOTE: changing env_vars here is an *update*, which the render-oss provider
+  # cannot perform on a free-tier service (see the comment above). So when you
+  # rotate API_KEYS, set the new value in the Render dashboard
+  # (portfolio-api > Environment) and update the `api_keys` workspace variable
+  # in Terraform Cloud to match, keeping this file the source of truth for the
+  # next create/replace. Rotating in the dashboard takes effect on the restart
+  # Render performs automatically; it does not need a Terraform run.
   env_vars = {
     "DATABASE_URL" = { value = neon_project.portfolio.connection_uri_pooler }
     "NODE_ENV"     = { value = "production" }
+    "API_KEYS"     = { value = var.api_keys }
   }
 
   custom_domains = [

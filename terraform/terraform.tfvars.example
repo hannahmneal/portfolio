@@ -14,3 +14,12 @@ neon_api_key     = "napi_xxx"
 neon_org_id      = "org-xxx" # Neon console > Organization settings
 image_repository = "ghcr.io/hannahmneal/portfolio-api"
 api_subdomain    = "api"
+
+# API keys allowed to call the API, as `label:scope:key` (scope: read|write).
+# Generate each with `openssl rand -hex 32`. Keep real values OUT of the repo -
+# supply this as a sensitive Terraform Cloud workspace variable.
+api_keys = "pages-proxy:read:xxx,laptop:write:xxx"
+
+# The read-scoped key the Pages Function proxy uses - the bare key, matching
+# the "pages-proxy:read:<key>" entry in api_keys above.
+api_proxy_key = "xxx"
