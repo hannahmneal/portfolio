@@ -1,4 +1,5 @@
 import pg from "pg"
+import { buildConnectionConfig } from "./dbConfig.js"
 import "dotenv/config"
 
 // This Postgres instance is shared with other projects, whose tables live in
@@ -12,22 +13,12 @@ import "dotenv/config"
 const SCHEMA = process.env.DB_SCHEMA ?? "portfolio"
 const options = `-c search_path=${SCHEMA}`
 
-// Render + Neon (production): DATABASE_URL is a postgres:// URI and requires SSL.
-// Local dev: discrete DB_* vars against a plain local Postgres, no SSL.
-export const pool = process.env.DATABASE_URL
-    ? new pg.Pool({
-        connectionString: process.env.DATABASE_URL,
-        ssl: { rejectUnauthorized: false },
-        options,
-    })
-    : new pg.Pool({
-        host: process.env.DB_HOST ?? "localhost",
-        port: Number(process.env.DB_PORT ?? 5432),
-        database: process.env.DB_NAME,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASS,
-        options,
-    })
+// Render + Neon (production): DATABASE_URL, TLS with the certificate AND the
+// hostname verified. Local dev: discrete DB_* vars, no TLS. Both shapes come
+// from dbConfig.js, so this pool and the migration runner cannot disagree
+// about how the connection is secured — which is exactly how they each ended
+// up with their own copy of `rejectUnauthorized: false`.
+export const pool = new pg.Pool({ ...buildConnectionConfig(), options })
 
 // Log a warning on connection errors so they surface clearly in the console
 pool.on("error", (err) => {

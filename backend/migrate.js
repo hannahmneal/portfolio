@@ -24,6 +24,7 @@ import { createHash } from "node:crypto"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 import pg from "pg"
+import { buildConnectionConfig } from "./dbConfig.js"
 import "dotenv/config"
 
 const MIGRATIONS_DIR = join(dirname(fileURLToPath(import.meta.url)), "migrations")
@@ -31,19 +32,9 @@ const MIGRATIONS_DIR = join(dirname(fileURLToPath(import.meta.url)), "migrations
 // The runner connects WITHOUT the app's search_path: migration files name
 // their schema explicitly (portfolio.users, not users), so that a migration
 // can create the schema it will later live in.
+// TLS terms come from dbConfig.js, the same place the app pool gets them.
 function client() {
-    return process.env.DATABASE_URL
-        ? new pg.Client({
-            connectionString: process.env.DATABASE_URL,
-            ssl: { rejectUnauthorized: false },
-        })
-        : new pg.Client({
-            host: process.env.DB_HOST ?? "localhost",
-            port: Number(process.env.DB_PORT ?? 5432),
-            database: process.env.DB_NAME,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASS,
-        })
+    return new pg.Client(buildConnectionConfig())
 }
 
 const checksum = (sql) => createHash("sha256").update(sql, "utf8").digest("hex").slice(0, 16)
