@@ -102,7 +102,7 @@ app.use("/portfolio", api)
 api.get("/projects", async (_req, res) => {
     try {
         const { rows } = await pool.query(
-            "SELECT * FROM projects ORDER BY created_at DESC"
+            "SELECT * FROM portfolio.projects ORDER BY created_at DESC"
         )
         res.json(rows)
     } catch (err) {
@@ -125,7 +125,7 @@ api.post("/projects", async (req, res) => {
 
     try {
         const { rows } = await pool.query(
-            "INSERT INTO projects (id, title, description, url, tags) " +
+            "INSERT INTO portfolio.projects (id, title, description, url, tags) " +
             "VALUES ($1, $2, $3, $4, $5) RETURNING *",
             [id, values.title, values.description ?? null, values.url ?? null, values.tags ?? null]
         )
@@ -143,7 +143,7 @@ api.patch("/projects/:id", async (req, res) => {
     const { values, error } = validateProjectPatch(req.body)
     if (error) return res.status(400).json({ error })
 
-    const { text, params } = buildUpdate("projects", values, "id", req.params.id)
+    const { text, params } = buildUpdate("portfolio.projects", values, "id", req.params.id)
 
     try {
         const { rows } = await pool.query(text, params)
@@ -174,7 +174,7 @@ api.post("/contact", limiter(60 * 60_000, 5), async (req, res) => {
 
     try {
         await pool.query(
-            "INSERT INTO contact_messages (id, name, email, message) VALUES ($1, $2, $3, $4)",
+            "INSERT INTO portfolio.contact_messages (id, name, email, message) VALUES ($1, $2, $3, $4)",
             [id, values.name, values.email, values.message]
         )
         res.status(201).json({ success: true })
