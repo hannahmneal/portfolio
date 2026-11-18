@@ -12,6 +12,17 @@ on:
     types: [published]
   workflow_dispatch:
 
+# Least privilege for every job in this file. Without this, the repository
+# default applies, which is write - meaning the token handed to `test` and
+# `audit`, the two jobs that install dev dependencies, could push commits to
+# this repository. A compromised package in either job could then write to
+# main and ride out on the next release. Neither job needs more than read.
+#
+# A job that needs more re-grants it for itself: build-and-push declares
+# packages: write below, which overrides this block for that job alone.
+permissions:
+  contents: read
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/portfolio-api
