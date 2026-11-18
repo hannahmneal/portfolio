@@ -10,6 +10,13 @@ writing commit messages like `feat: add contact form`, not by editing here.
 The version in `version.txt`, `frontend/package.json` and
 `backend/package.json` is kept in sync with the most recent release tag.
 
+## [0.4.1](https://github.com/hannahmneal/portfolio/compare/v0.4.0...v0.4.1) (2026-11-18)
+
+
+### Bug Fixes
+
+* **db:** name the schema in SQL instead of pinning search_path ([b206062](https://github.com/hannahmneal/portfolio/commit/b20606286aefedaa3c7e6867810023bb96e29530))
+
 ## [0.4.0](https://github.com/hannahmneal/portfolio/compare/v0.3.2...v0.4.0) (2026-11-18)
 
 
