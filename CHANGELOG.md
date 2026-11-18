@@ -10,6 +10,21 @@ writing commit messages like `feat: add contact form`, not by editing here.
 The version in `version.txt`, `frontend/package.json` and
 `backend/package.json` is kept in sync with the most recent release tag.
 
+## [0.4.0](https://github.com/hannahmneal/portfolio/compare/v0.3.2...v0.4.0) (2026-11-18)
+
+
+### Features
+
+* **api:** add migrations, key scopes, and drop the /users route ([07d8265](https://github.com/hannahmneal/portfolio/commit/07d8265da3a813b480d06d77d66e2799bf50bc8f))
+* **api:** added auth to API which now requires a scoped token on all routes ([fab1f4e](https://github.com/hannahmneal/portfolio/commit/fab1f4ec8092a902570a01869efc7c594fd65378))
+* **api:** Adds scoped key auth for API ([8f65f7f](https://github.com/hannahmneal/portfolio/commit/8f65f7f71ce732b572f1efd403a3c3880269ded7))
+* **db:** record the hand-made schema fix and drop the placeholder user ([d0f9eb7](https://github.com/hannahmneal/portfolio/commit/d0f9eb7a960cc7af297f1aeeb2151f136961a361))
+
+
+### Bug Fixes
+
+* **db:** verify the database certificate instead of accepting any ([0761807](https://github.com/hannahmneal/portfolio/commit/07618076c2aa304c07fc026fb3f472703bded748))
+
 ## [0.3.2](https://github.com/hannahmneal/portfolio/compare/v0.3.1...v0.3.2) (2026-11-11)
 
 
