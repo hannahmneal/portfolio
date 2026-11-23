@@ -1,0 +1,42 @@
+# Weekly version updates. Security updates are enabled separately in repo
+# settings and arrive as soon as an advisory is published; they also use
+# the commit-message settings below.
+#
+# PR titles must be conventional commits: under squash merge the title is
+# the changelog entry. `deps` maps to the "Dependencies" section in
+# release-please-config.json.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule: { interval: weekly }
+    commit-message: { prefix: "deps(frontend)" }
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: npm
+    directory: /backend
+    schedule: { interval: weekly }
+    commit-message: { prefix: "deps(backend)" }
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: docker
+    directory: /backend
+    schedule: { interval: weekly }
+    commit-message: { prefix: "deps(docker)" }
+
+  - package-ecosystem: terraform
+    directory: /terraform
+    schedule: { interval: weekly }
+    commit-message: { prefix: "deps(terraform)" }
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }
+    commit-message: { prefix: "ci(actions)" }
+    groups:
+      actions:
+        patterns: ["*"]
