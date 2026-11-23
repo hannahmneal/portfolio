@@ -337,3 +337,6 @@ terraform.tfvars
 !.env.example
 
 frontend/docs/design-handoff/reference-pages
+
+# Local working notes (not tracked)
+scratchpad/
