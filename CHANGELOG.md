@@ -10,6 +10,18 @@ writing commit messages like `feat: add contact form`, not by editing here.
 The version in `version.txt`, `frontend/package.json` and
 `backend/package.json` is kept in sync with the most recent release tag.
 
+## [0.4.2](https://github.com/hannahmneal/portfolio/compare/v0.4.1...v0.4.2) (2026-11-24)
+
+
+### Bug Fixes
+
+* **db:** serialize concurrent migration runs ([#112](https://github.com/hannahmneal/portfolio/issues/112)) ([8094cc2](https://github.com/hannahmneal/portfolio/commit/8094cc2d95baee3dba732e1708265b7be5aa105c))
+
+
+### Documentation
+
+* **db:** explain IF NOT EXISTS in migrations ([#114](https://github.com/hannahmneal/portfolio/issues/114)) ([7c2642e](https://github.com/hannahmneal/portfolio/commit/7c2642e5fcfb1d663b4254f5db6d4a4d30e34d9b))
+
 ## [0.4.1](https://github.com/hannahmneal/portfolio/compare/v0.4.0...v0.4.1) (2026-11-18)
 
 
