@@ -8,7 +8,8 @@
     "start": "node server.js",
     "migrate": "node migrate.js",
     "migrate:dry": "node migrate.js --dry-run",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "check:db": "node scripts/check-db-before-deploy.js"
   },
   "keywords": [],
   "author": "",
