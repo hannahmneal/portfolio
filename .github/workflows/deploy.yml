@@ -193,6 +193,11 @@ jobs:
         run: npm run migrate
         working-directory: backend
 
+      - name: Check app connection through pooler
+        run: npm run check:db
+        working-directory: backend
+        timeout-minutes: 2
+
       # render_web_service is pinned to the "latest" tag on purpose (see the
       # comment in render.tf) - `terraform apply` above only provisions
       # infra, it never tells Render to pull the image build-and-push just
