@@ -38,6 +38,7 @@ function client() {
 }
 
 const checksum = (sql) => createHash("sha256").update(sql, "utf8").digest("hex").slice(0, 16)
+const MIGRATION_LOCK = 7_314_001  // HN 11/23/26: Questions about this? See Issue #89's first comment.
 
 async function ensureLedger(db) {
     // The ledger lives in the portfolio schema alongside what it tracks, so a
@@ -86,8 +87,6 @@ export async function migrate({ dryRun = false } = {}) {
         for (const filename of files) {
             const sql = await readFile(join(MIGRATIONS_DIR, filename), "utf8")
             const sum = checksum(sql)
-            const MIGRATION_LOCK = 7_314_001  // HN 11/23/26: Questions about this? See Issue #89's first comment.
-
 
             if (already.has(filename)) {
                 // An edited file is a warning, not an error: the change is not
