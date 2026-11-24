@@ -38,18 +38,29 @@ function client() {
 }
 
 const checksum = (sql) => createHash("sha256").update(sql, "utf8").digest("hex").slice(0, 16)
+const MIGRATION_LOCK = 7_314_001  // HN 11/23/26: Questions about this? See Issue #89's first comment.
 
 async function ensureLedger(db) {
     // The ledger lives in the portfolio schema alongside what it tracks, so a
     // database shared with other projects gains nothing in `public`.
-    await db.query("CREATE SCHEMA IF NOT EXISTS portfolio")
-    await db.query(`
-        CREATE TABLE IF NOT EXISTS portfolio.schema_migrations (
-            filename   TEXT PRIMARY KEY,
-            checksum   TEXT        NOT NULL,
-            applied_at TIMESTAMPTZ NOT NULL DEFAULT now()
-        )
-    `)
+    // 🔒 Two concurrent `CREATE...IF NOT EXISTS` can still collide
+    // on Postgres's catalog and fail, hence the precise migration lock.
+    await db.query("BEGIN")
+    try {
+        await db.query("SELECT pg_advisory_xact_lock($1)", [MIGRATION_LOCK])
+        await db.query("CREATE SCHEMA IF NOT EXISTS portfolio")
+        await db.query(`
+            CREATE TABLE IF NOT EXISTS portfolio.schema_migrations (
+                filename   TEXT PRIMARY KEY,
+                checksum   TEXT        NOT NULL,
+                applied_at TIMESTAMPTZ NOT NULL DEFAULT now()
+            )
+        `)
+        await db.query("COMMIT")
+    } catch (err) {
+        await db.query("ROLLBACK")
+        throw err
+    }
 }
 
 export async function migrate({ dryRun = false } = {}) {
@@ -104,6 +115,19 @@ export async function migrate({ dryRun = false } = {}) {
             // mid-run can never record a migration that did not finish.
             await db.query("BEGIN")
             try {
+                // Wait for any concurrent run, then re-check: `already` was read before
+                // it held the lock in case another run applied this file since.
+                await db.query("SELECT pg_advisory_xact_lock($1)", [MIGRATION_LOCK])
+                const { rowCount } = await db.query(
+                    "SELECT 1 FROM portfolio.schema_migrations WHERE filename = $1",
+                    [filename]
+                )
+                if (rowCount > 0) {
+                    await db.query("ROLLBACK")
+                    console.log(`  = ${filename} (applied by a concurrent run)`)
+                    continue
+                }
+
                 await db.query(sql)
                 await db.query(
                     "INSERT INTO portfolio.schema_migrations (filename, checksum) VALUES ($1, $2)",
@@ -116,6 +140,7 @@ export async function migrate({ dryRun = false } = {}) {
                 await db.query("ROLLBACK")
                 throw new Error(`${filename} failed: ${err.message}`, { cause: err })
             }
+
         }
     } finally {
         await db.end()
