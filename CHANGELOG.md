@@ -10,6 +10,14 @@ writing commit messages like `feat: add contact form`, not by editing here.
 The version in `version.txt`, `frontend/package.json` and
 `backend/package.json` is kept in sync with the most recent release tag.
 
+## [0.4.3](https://github.com/hannahmneal/portfolio/compare/v0.4.2...v0.4.3) (2026-11-24)
+
+
+### Dependencies
+
+* **backend:** bump the minor-and-patch group in /backend with 5 updates ([#106](https://github.com/hannahmneal/portfolio/issues/106)) ([8886099](https://github.com/hannahmneal/portfolio/commit/88860993db9c4ffe49f5d6624891d6a394944be7))
+* **terraform:** bump hashicorp/random from 3.9.0 to 3.9.1 in /terraform ([#103](https://github.com/hannahmneal/portfolio/issues/103)) ([eb09500](https://github.com/hannahmneal/portfolio/commit/eb09500a566daa60803345373ef56776202fb3e1))
+
 ## [0.4.2](https://github.com/hannahmneal/portfolio/compare/v0.4.1...v0.4.2) (2026-11-24)
 
 
