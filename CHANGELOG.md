@@ -10,6 +10,14 @@ writing commit messages like `feat: add contact form`, not by editing here.
 The version in `version.txt`, `frontend/package.json` and
 `backend/package.json` is kept in sync with the most recent release tag.
 
+## [0.4.5](https://github.com/hannahmneal/portfolio/compare/v0.4.4...v0.4.5) (2026-11-25)
+
+
+### Dependencies
+
+* **docker:** bump node from 20-alpine to 26-alpine in /backend ([#102](https://github.com/hannahmneal/portfolio/issues/102)) ([2d94f84](https://github.com/hannahmneal/portfolio/commit/2d94f840566258b268b312b70ad6f694d5c7e46d))
+* **frontend:** bump @testing-library/jest-dom from 6.9.1 to 8.0.0 in /frontend ([#109](https://github.com/hannahmneal/portfolio/issues/109)) ([2dff7c1](https://github.com/hannahmneal/portfolio/commit/2dff7c14f2f30fcdba8f75d03e325f28dde61d3a))
+
 ## [0.4.4](https://github.com/hannahmneal/portfolio/compare/v0.4.3...v0.4.4) (2026-11-25)
 
 
