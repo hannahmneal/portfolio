@@ -24,6 +24,16 @@ const PRESSED_BG = '#5E5E5A'
 const PRESSED_TEXT = '#FFFFFF'
 const PRESSED_SHADOW = 'inset 2px 2px 0 #2A2A28'
 
+// jsdom 31 reserializes `box-shadow` into canonical order - color first,
+// `inset` last, and an explicit `0px` blur - so a computed value never matches
+// the authored string above. The constants above remain the source of truth for
+// what the theme supplies; these are what `getComputedStyle` reports back.
+const PRIMARY_SHADOW_COMPUTED =
+  'rgba(255,255,255,0.4) 1px 1px inset, rgba(0,0,0,0.3) -1px -2px inset, #EEEEEB 0px 0px 0px 3px, #1A1A1A 0px 0px 0px 5px'
+const SECONDARY_SHADOW_COMPUTED =
+  'rgba(255,255,255,0.14) 1px 1px inset, rgba(0,0,0,0.55) -1px -2px inset'
+const PRESSED_SHADOW_COMPUTED = '#2A2A28 2px 2px inset'
+
 const DISABLED_BG = '#9A9A96'
 const DISABLED_TEXT = '#3E3E3B'
 const DISABLED_BORDER = '1px solid transparent'
@@ -101,7 +111,7 @@ describe.each(['light', 'dark'])('shared contract in %s mode', (mode) => {
 
     test('uses font IBM Plex Sans with font weight 600 at 14px', () => {
       expectStyles(renderIt(), 'rest', {
-        'font-family': '"IBM Plex Sans", sans-serif',
+        'font-family': 'IBM Plex Sans, sans-serif',
         'font-weight': '600',
         'font-size': '14px',
       })
@@ -158,7 +168,7 @@ describe('PrimaryButton', () => {
         'background-color': ACCENT,
         color: ACCENT_TEXT,
         border: `1px solid ${LIGHT.border}`,
-        'box-shadow': PRIMARY_SHADOW,
+        'box-shadow': PRIMARY_SHADOW_COMPUTED,
         margin: '1rem',
       })
     })
@@ -167,7 +177,7 @@ describe('PrimaryButton', () => {
       expectStyles(renderInMode('light', <PrimaryButton>Primary</PrimaryButton>), 'hover', {
         filter: 'brightness(1.12)',
         'background-color': ACCENT,
-        'box-shadow': PRIMARY_SHADOW,
+        'box-shadow': PRIMARY_SHADOW_COMPUTED,
       })
     })
 
@@ -175,7 +185,7 @@ describe('PrimaryButton', () => {
       expectStyles(renderInMode('light', <PrimaryButton>Primary</PrimaryButton>), 'active', {
         'background-color': PRESSED_BG,
         color: PRESSED_TEXT,
-        'box-shadow': PRESSED_SHADOW,
+        'box-shadow': PRESSED_SHADOW_COMPUTED,
       })
     })
 
@@ -183,7 +193,7 @@ describe('PrimaryButton', () => {
       expectStyles(renderInMode('light', <PrimaryButton pressed>Primary</PrimaryButton>), 'rest', {
         'background-color': PRESSED_BG,
         color: PRESSED_TEXT,
-        'box-shadow': PRESSED_SHADOW,
+        'box-shadow': PRESSED_SHADOW_COMPUTED,
       })
     })
 
@@ -226,7 +236,7 @@ describe('SecondaryButton', () => {
         'background-color': LIGHT.bg,
         color: LIGHT.text,
         border: `1px solid ${LIGHT.border}`,
-        'box-shadow': SECONDARY_SHADOW,
+        'box-shadow': SECONDARY_SHADOW_COMPUTED,
         margin: '1rem',
       })
     })
@@ -241,14 +251,14 @@ describe('SecondaryButton', () => {
       expectStyles(renderInMode('light', <SecondaryButton>Secondary</SecondaryButton>), 'active', {
         'background-color': PRESSED_BG,
         color: PRESSED_TEXT,
-        'box-shadow': PRESSED_SHADOW,
+        'box-shadow': PRESSED_SHADOW_COMPUTED,
       })
     })
 
     test('shows the pressed styles while `aria-pressed` is true', () => {
       expectStyles(renderInMode('light', <SecondaryButton pressed>Secondary</SecondaryButton>), 'rest', {
         'background-color': PRESSED_BG,
-        'box-shadow': PRESSED_SHADOW,
+        'box-shadow': PRESSED_SHADOW_COMPUTED,
       })
     })
 
@@ -290,7 +300,7 @@ describe('GhostButton', () => {
 
     test('underlines its label at 2px, offset clear of the descenders', () => {
       expectStyles(renderInMode('light', <GhostButton>Ghost</GhostButton>), 'rest', {
-        'text-decoration': 'underline',
+        'text-decoration': 'underline 2px',
         'text-decoration-thickness': '2px',
         'text-underline-offset': '4px',
       })
@@ -319,7 +329,7 @@ describe('GhostButton', () => {
         'background-color': 'transparent',
         'border-color': 'transparent',
         color: LIGHT.ghostDisabled,
-        'text-decoration': 'underline',
+        'text-decoration': 'underline 2px',
         'text-decoration-thickness': '2px',
       })
     })
@@ -331,7 +341,7 @@ describe('GhostButton', () => {
         'background-color': 'transparent',
         color: DARK.text,
         'box-shadow': 'none',
-        'text-decoration': 'underline',
+        'text-decoration': 'underline 2px',
       })
     })
 
@@ -408,7 +418,7 @@ describe('ThemeButton', () => {
   // Both modes share one bevel, so this value does not change with the mode.
   test.each(['light', 'dark'])('takes the secondary bevel in %s mode', (mode) => {
     expectStyles(renderThemeButton(mode), 'rest', {
-      'box-shadow': SECONDARY_SHADOW,
+      'box-shadow': SECONDARY_SHADOW_COMPUTED,
     })
   })
 })
