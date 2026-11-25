@@ -10,6 +10,13 @@ writing commit messages like `feat: add contact form`, not by editing here.
 The version in `version.txt`, `frontend/package.json` and
 `backend/package.json` is kept in sync with the most recent release tag.
 
+## [0.4.6](https://github.com/hannahmneal/portfolio/compare/v0.4.5...v0.4.6) (2026-11-25)
+
+
+### Dependencies
+
+* **frontend:** bump jsdom from 29.1.1 to 31.0.1 in /frontend ([#110](https://github.com/hannahmneal/portfolio/issues/110)) ([9ac0dff](https://github.com/hannahmneal/portfolio/commit/9ac0dff8e8f1b9b4435dc36393ca77748a177487))
+
 ## [0.4.5](https://github.com/hannahmneal/portfolio/compare/v0.4.4...v0.4.5) (2026-11-25)
 
 
