@@ -10,6 +10,16 @@ writing commit messages like `feat: add contact form`, not by editing here.
 The version in `version.txt`, `frontend/package.json` and
 `backend/package.json` is kept in sync with the most recent release tag.
 
+## [0.4.4](https://github.com/hannahmneal/portfolio/compare/v0.4.3...v0.4.4) (2026-11-25)
+
+
+### Dependencies
+
+* **backend:** bump dotenv from 17.4.2 to 18.0.10 in /backend ([#107](https://github.com/hannahmneal/portfolio/issues/107)) ([1c2a2cf](https://github.com/hannahmneal/portfolio/commit/1c2a2cf34b4330f825e2fe5046c2f6a21f5dcc57))
+* **frontend:** bump the minor-and-patch group across 1 directory with 6 updates ([#108](https://github.com/hannahmneal/portfolio/issues/108)) ([3c0c44b](https://github.com/hannahmneal/portfolio/commit/3c0c44b9088b449c637a8b35a75e5ef056bd86c0))
+* **frontend:** bump vitest from 4.1.12 to 5.1.1 in /frontend ([#111](https://github.com/hannahmneal/portfolio/issues/111)) ([facab65](https://github.com/hannahmneal/portfolio/commit/facab659bcd28e33095eebc069e9ba0ca11656a9))
+* **terraform:** bump cloudflare/cloudflare from 5.19.1 to 5.29.0 in /terraform ([#105](https://github.com/hannahmneal/portfolio/issues/105)) ([d314e60](https://github.com/hannahmneal/portfolio/commit/d314e600f639bb7bff76ddcf4a21bf97420d5966))
+
 ## [0.4.3](https://github.com/hannahmneal/portfolio/compare/v0.4.2...v0.4.3) (2026-11-24)
 
 
